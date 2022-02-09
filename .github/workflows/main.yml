@@ -1,65 +1,18 @@
-name: Build and Upload to cloud  
-
+name: Acquire activation file
 on:
-  pull_request: {}
-  push: { branches: [master] }
- 
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
- 
+  workflow_dispatch: {}
 jobs:
-
-  BuildWindows:
-    name: Build and Upload the Project for Windows  
+  activation:
+    name: Request manual activation file 🔑
     runs-on: ubuntu-latest
-   
-        
     steps:
-     
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # Request manual activation file
+      - name: Request manual activation file
+        id: getManualLicenseFile
+        uses: game-ci/unity-request-activation-file@v2
+      # Upload artifact (Unity_v20XX.X.XXXX.alf)
+      - name: Expose as artifact
+        uses: actions/upload-artifact@v2
         with:
-          lfs: true
-     
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: Library
-          key: Library
- 
-      # Test
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with: 
-          
-          unityVersion: 2019.3.9f1
- 
-      # Build for win
-      - name: Build project for windows
-        uses: webbertakken/unity-builder@v0.10
-        with:
-          
-           buildName: InteractiveWriting-Windows v${{ github.run_number }}
-           unityVersion: 2019.3.9f1
-           targetPlatform : 
-            StandaloneWindows64
-
-         
-      # Output for win
-      - uses: actions/upload-artifact@v1
-        with:
-          name: WinBuiltProject
-          path: build
-
-      # Upload the build to Google Drive    
-      - name: Upload Win build to Google Drive
-        uses: Jodebu/upload-to-drive@master
-        with:
-           target: build     
-           name: InteractiveWriting-Win v${{ github.run_number }}
-           credentials: ${{ secrets.CREDENTIALS }}
-           folder: ${{ secrets.DRIVE_FOLDER_ID }}
-      
-
-           
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
