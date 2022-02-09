@@ -30,10 +30,12 @@ jobs:
  
       # Test
       - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with: 
-          
-          unityVersion: 2019.2.11f1
+        uses: webbertakken/unity-test-runner@v1.6
+        env:
+            UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+            customParameters: '-nographics' # <--- This is the important bit
+            unityVersion: 2019.2.11f1
  
       # Build for win
       - name: Build project for windows
