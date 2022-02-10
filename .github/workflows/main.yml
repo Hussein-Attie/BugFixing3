@@ -12,8 +12,7 @@ jobs:
   BuildWindows:
     name: Build and Upload the Project for Windows  
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
+   
         
     steps:
      
@@ -21,8 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0
-           lfs: true
+          lfs: true
      
       # Cache
       - uses: actions/cache@v1.1.0
@@ -30,13 +28,20 @@ jobs:
           path: Library
           key: Library
  
+      # Test
+      - name: Run tests
+        uses: webbertakken/unity-test-runner@v1.3
+        with: 
+          
+          unityVersion: 2019.3.9f1
+ 
       # Build for win
       - name: Build project for windows
         uses: webbertakken/unity-builder@v0.10
         with:
           
            buildName: InteractiveWriting-Windows v${{ github.run_number }}
-           unityVersion: 2019.2.2f1
+           unityVersion: 2019.3.9f1
            targetPlatform : 
             StandaloneWindows64
 
