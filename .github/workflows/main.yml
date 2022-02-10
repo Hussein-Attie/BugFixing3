@@ -3,20 +3,11 @@ name: Build project
 on: [push, pull_request]
 
 jobs:
-  buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  buildForWin:
+    name: Build for win
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        targetPlatform:
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneWindows # Build a Windows standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - iOS # Build an iOS player.
-          - Android # Build an Android .apk standalone app.
-          - WebGL # WebGL.
     steps:
       - uses: actions/checkout@v2
         with:
@@ -25,14 +16,14 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}
+          key: Library-StandaloneWindows64
           restore-keys: Library-
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: ${{ matrix.targetPlatform }}
+          targetPlatform:  StandaloneWindows64
       - uses: actions/upload-artifact@v2
         with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          name: Build-StandaloneWindows64
+          path: build/StandaloneWindows64
