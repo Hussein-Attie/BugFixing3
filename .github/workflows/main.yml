@@ -1,39 +1,38 @@
-name: Build
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+name: Build project
+
+on: [push, pull_request]
 
 jobs:
-  build-unitybundle:
-    name: Build Unity Asset Bundles
+  buildForAllSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - iOS # Build an iOS player.
+          - Android # Build an Android .apk standalone app.
+          - WebGL # WebGL.
     steps:
-    # Checkout
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        lfs: true
-    # Cache
-    - name: Cache
-      uses: actions/cache@v1.1.0
-      with:
-        path: |
-          unity/Library
-        key: Library-Unity-KSP
-    # Build
-    - name: Build project
-      uses: webbertakken/unity-builder@v1.0
-      with:
-        projectPath: unity
-        unityVersion: 2019.2.2f1
-        targetPlatform: StandaloneWindows
-        buildMethod: AssetBundleBuilder.RunAssetBuild
-    # Output 
-    - uses: actions/upload-artifact@v1
-      with:
-        name: AssetBundle
-        path: GameData
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: Library-
+      - uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
