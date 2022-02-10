@@ -33,7 +33,7 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.3
         with: 
           
-          unityVersion: 2019.3.9f1
+          unityVersion: 2019.2.2f1
  
       # Build for win
       - name: Build project for windows
@@ -41,7 +41,7 @@ jobs:
         with:
           
            buildName: InteractiveWriting-Windows v${{ github.run_number }}
-           unityVersion: 2019.3.9f1
+           unityVersion: 2019.2.2f1
            targetPlatform : 
             StandaloneWindows64
 
