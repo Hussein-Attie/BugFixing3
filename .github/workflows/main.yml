@@ -40,7 +40,7 @@ jobs:
           targetPlatform: StandaloneWindows64 
 
       # Output
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
-          name: WinBuiltProject
+          name: Build
           path: build
