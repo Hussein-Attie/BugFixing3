@@ -40,6 +40,8 @@ jobs:
           targetPlatform: StandaloneWindows64 
 
       # Output
-      - working-directory: GITHUB_WORKSPACE
-        run : actions/upload-artifact@v2
-        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@master
+        with:
+         name: gamebuild
+         path: build
