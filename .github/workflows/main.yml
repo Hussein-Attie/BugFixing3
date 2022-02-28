@@ -40,8 +40,7 @@ jobs:
           targetPlatform: StandaloneWindows64 
 
       # Output
-      - name: Download Build
-        uses: actions/download-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: build
+          name: game
+          path: gamepath
