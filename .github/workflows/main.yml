@@ -20,15 +20,11 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
-       #Test
+ # Test
       - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:  
-         unityversion: 2020.3.17f1
-         
+        uses: webbertakken/unity-test-runner@v1.7
+        with:
+          unityVersion: 2020.3.17f1
 
       # Build
       - name: Build project
