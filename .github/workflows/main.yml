@@ -28,7 +28,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:  
          unityversion: 2020.3.17f1
-         githubToken: ${{ secrets.GITHUB_TOKEN }}
+         
 
       # Build
       - name: Build project
