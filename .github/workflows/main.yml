@@ -24,8 +24,8 @@ jobs:
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.7
         with:
-          unityVersion: 2020.3.17f1
-
+          unityVersion: 2019.2.11f1
+          
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
