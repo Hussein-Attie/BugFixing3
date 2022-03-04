@@ -27,8 +27,9 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
+          versioning: Semantic
           targetPlatform: ${{ matrix.targetPlatform }}
-          
+
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
