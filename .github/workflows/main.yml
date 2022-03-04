@@ -29,11 +29,6 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r Build-${{ matrix.targetPlatform }}.zip Build-${{ matrix.targetPlatform }}
-
-
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
