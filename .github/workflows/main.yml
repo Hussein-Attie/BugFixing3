@@ -50,7 +50,7 @@ jobs:
       - name: CompressTheFinalResult
         uses: thedoctor0/zip-release@master
         with:
-           path: path/to/artifacts/Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
+           path: artifacts/Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
            filename: 'Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}.zip'
        
       - uses: actions/upload-artifact@v2
