@@ -37,7 +37,7 @@ jobs:
        #Output 
       - uses: actions/upload-artifact@v2
         with:
-          name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}'
+          name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
           path: build/${{ matrix.targetPlatform }}
         
          #download artifacts
