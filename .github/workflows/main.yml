@@ -51,12 +51,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
  
-           filename: artifacts
+           filename: Build-StandaloneWindows-2.0.7.zip
        
       - uses: actions/upload-artifact@v2
         with:
           name: archived
-          path: artifacts
+          path: Build-StandaloneWindows-2.0.7.zip
 
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
