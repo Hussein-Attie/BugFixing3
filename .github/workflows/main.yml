@@ -15,16 +15,18 @@ jobs:
           - StandaloneWindows # Build a Windows standalone.
      
     steps:
+    #Checkout
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
           lfs: true
+      #cache
       - uses: actions/cache@v2
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
-          
+      #Build
       - uses: game-ci/unity-builder@v2
         id: myBuildStep
         env:
@@ -32,17 +34,28 @@ jobs:
         with:
           versioning: Semantic
           targetPlatform: ${{ matrix.targetPlatform }}
-
+       #Output 
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}'
           path: build/${{ matrix.targetPlatform }}
-          
+        
+         #download artifacts
       - uses: actions/download-artifact@v3
         id: download
         with:
-         name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}'
+         name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
          path: path/to/artifacts
          
+      - name: CompressTheFinalResult
+        uses: thedoctor0/zip-release@master
+        with:
+           filename: 'Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}.zip'
+       
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}.zip
+
+          
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
