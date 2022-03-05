@@ -55,8 +55,8 @@ jobs:
        
       - uses: actions/upload-artifact@v2
         with:
-          name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}.zip
-          path: path/to/artifacts/Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}.zip
-          
+          name: archived
+          path: artifacts
+
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
