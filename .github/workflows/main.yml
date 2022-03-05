@@ -33,13 +33,13 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: Build-${{ matrix.targetPlatform }}
+          name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}'
           path: build/${{ matrix.targetPlatform }}
           
       - uses: actions/download-artifact@v3
         id: download
         with:
-         name: Build-${{ matrix.targetPlatform }}
+         name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}'
          path: path/to/artifacts
          
       - name: 'Echo download path'
