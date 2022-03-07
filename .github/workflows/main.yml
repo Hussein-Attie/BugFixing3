@@ -40,23 +40,14 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
           path: build/${{ matrix.targetPlatform }}
         
-         #download artifacts
-      - uses: actions/download-artifact@v3
-        id: download
+         #upload to google drive
+      - name: Upload build to Google Drive
+        uses: Jodebu/upload-to-drive@master
         with:
-         name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
-         path: path/to/artifacts
-         
-      - name: CompressTheFinalResult
-        uses: thedoctor0/zip-release@master
-        with:
- 
-           filename: Build-StandaloneWindows-2.0.7.zip
-       
-      - uses: actions/upload-artifact@v2
-        with:
-          name: archived
-          path: Build-StandaloneWindows-2.0.7.zip
+           target: build/${{ matrix.targetPlatform }}   
+           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
+           credentials: ${{ secrets.CREDENTIALS }}
+           folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
+        run: echo 'File uploaded to ${{ steps.driveUpload.outputs.link }}'
