@@ -39,15 +39,22 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
           path: build/${{ matrix.targetPlatform }}
+        #download artifacts
+        
+      - uses: actions/download-artifact@v3
+        id: download
+        with:
+         name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
+         path: path/to/artifacts
         
          #upload to google drive
       - name: Upload build to Google Drive
         uses: Jodebu/upload-to-drive@master
         with:
-           target: build 
+           target: artifacts 
            name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
            credentials: ${{ secrets.CREDENTIALS }}
            folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
-      - name: 'Echo download path'
+      - name: 'Echo drive link'
         run: echo 'File uploaded to ${{ steps.driveUpload.outputs.link }}'
