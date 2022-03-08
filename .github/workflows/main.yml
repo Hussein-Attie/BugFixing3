@@ -49,5 +49,5 @@ jobs:
            credentials: ${{ secrets.CREDENTIALS }}
            folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
-      - name: 'Echo drive link'
-        run: echo 'File uploaded to' ${{ steps.driveUpload.outputs.link }
+     # - name: 'Echo drive link'
+      #  run: echo 'File uploaded to' ${{ steps.driveUpload.outputs.link }
