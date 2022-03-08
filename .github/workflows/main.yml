@@ -45,7 +45,7 @@ jobs:
         uses: Jodebu/upload-to-drive@master
         with:
            target:  build/${{ matrix.targetPlatform }}
-           name: Build-${{ matrix.targetPlatform }}-${{ 
+           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
            credentials: ${{ secrets.CREDENTIALS }}
            folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
