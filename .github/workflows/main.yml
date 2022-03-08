@@ -32,6 +32,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
+          buildName: TestGame-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
           versioning: Semantic
           targetPlatform: ${{ matrix.targetPlatform }}
        #Output 
