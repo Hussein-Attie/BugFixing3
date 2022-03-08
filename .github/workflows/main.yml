@@ -44,10 +44,10 @@ jobs:
       - name: Upload build to Google Drive
         uses: Jodebu/upload-to-drive@master
         with:
-           target:  build/${{ matrix.targetPlatform }}
-           name: Build-${{ matrix.targetPlatform }}-${{ steps.myBuildStep.outputs.buildVersion }}
+           target:  build
+           name: Build-${{ steps.myBuildStep.outputs.buildVersion }}
            credentials: ${{ secrets.CREDENTIALS }}
            folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
       - name: 'Echo drive link'
-        run: echo 'File uploaded to ${{ steps.driveUpload.outputs.link }}'
+        run: echo 'File uploaded to' ${{ steps.driveUpload.outputs.link }
