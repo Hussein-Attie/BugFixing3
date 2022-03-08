@@ -52,4 +52,4 @@ jobs:
            folder: ${{ secrets.DRIVE_FOLDER_ID }}
 
       - name: 'Display Drive Link'
-        run: echo File uploaded to ${{ steps.driveUpload.outputs.link }
+        run: echo File uploaded to ${{ steps.driveUpload.outputs.link }}
