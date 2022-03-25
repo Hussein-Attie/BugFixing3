@@ -1,3 +1,17 @@
+# [0.3.0](https://github.com/Hussein-Attie/BugFixing3/compare/v0.2.0...v0.3.0) (2022-03-25)
+
+
+### Bug Fixes
+
+* New Enime Added ([4e53a70](https://github.com/Hussein-Attie/BugFixing3/commit/4e53a70851595e24bbdffe166e52ed0b8d1ed078))
+
+
+### Features
+
+* **scope:** New Level ([d2035b2](https://github.com/Hussein-Attie/BugFixing3/commit/d2035b2adfff332c58bd26ad1ae3f85f60357f24))
+
+
+
 # [0.2.0](https://github.com/Hussein-Attie/BugFixing3/compare/v0.1.0...v0.2.0) (2022-03-25)
 
 
